@@ -33,6 +33,7 @@ p {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
+<<<<<<< HEAD
 #flag {
   height: 25px;
 }
@@ -41,3 +42,21 @@ p {
   bottom: 0;
   margin-bottom: -100px;
 }
+=======
+#vid:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+}
+
+#flag{
+    height: 25px;
+}
+
+.footer{
+    bottom: 0;
+    margin-bottom: -100px;
+}
+
+.fas{
+    font-size: 48px;
+}
+>>>>>>> eaa75f29ded8b9b5185268d025c168a219c96335
