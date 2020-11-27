@@ -6,6 +6,7 @@ input.addEventListener("keyup", function(event) {
   }
 });
 
+
 fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
 .then((response)=>{
     return response.json();
@@ -14,6 +15,8 @@ fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
     document.getElementById("country").innerHTML = data.country;
     document.getElementById("flag").src = data.countryInfo.flag;
     document.getElementById("active").innerHTML = data.active.toLocaleString();
+    document.getElementById("critical").innerHTML = data.critical.toLocaleString();
+    document.getElementById("recovered").innerHTML = data.recovered.toLocaleString();
 })
 
 const changeCountry = () =>{
@@ -24,6 +27,8 @@ const changeCountry = () =>{
     })
     .then((data)=>{
         document.getElementById("country").innerHTML = data.country.toLocaleString();
+        document.getElementById("flag").src = data.countryInfo.flag;
         document.getElementById("active").innerHTML = data.active.toLocaleString();
+        document.getElementById("critical").innerHTML = data.critical.toLocaleString();
     })
 }
