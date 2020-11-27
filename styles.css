@@ -1,43 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mulish&family=Poppins&display=swap");
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-    font-family: 'Poppins', Helvetica, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Helvetica, sans-serif;
 }
 
-body{
-    min-height: 100%;
-    position: relative;
-    background-color: #f7f7f7;
+body {
+  min-height: 100%;
+  position: relative;
+  background-color: #f7f7f7;
 }
 
-p{
-    line-height: 150%;
+p {
+  line-height: 150%;
 }
 
-.wrapper{
-    min-height: 100vh;
-    position: relative;
+.wrapper {
+  min-height: 100vh;
+  position: relative;
 }
 
-.navbar{
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;
-    font-weight: bold;
+.navbar {
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 6px -6px #999;
+  font-weight: bold;
 }
 
-.card:hover{
-    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+.card:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
-#flag{
-    height: 25px;
+#flag {
+  height: 25px;
 }
 
-.footer{
-    bottom: 0;
-    margin-bottom: -100px;
+.footer {
+  bottom: 0;
+  margin-bottom: -100px;
 }
