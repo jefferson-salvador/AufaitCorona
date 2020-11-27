@@ -8,17 +8,25 @@
 }
 
 body{
-    height: 100vh;
+    min-height: 100%;
+    position: relative;
+    background-color: #f7f7f7;
+}
+
+p{
+    line-height: 150%;
 }
 
 .wrapper{
     min-height: 100vh;
+    position: relative;
 }
 
 .navbar{
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 6px -6px #999;
+    font-weight: bold;
 }
 
 .card:hover{
@@ -31,4 +39,5 @@ body{
 
 .footer{
     bottom: 0;
+    margin-bottom: -100px;
 }
