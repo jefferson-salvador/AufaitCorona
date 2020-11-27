@@ -7,6 +7,14 @@
     font-family: 'Poppins', Helvetica, sans-serif;
 }
 
+body{
+    height: 100vh;
+}
+
+.wrapper{
+    height: 100%;
+}
+
 .navbar{
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
@@ -19,4 +27,8 @@
 
 #flag{
     height: 25px;
+}
+
+.flag{
+    bottom: 0;
 }
