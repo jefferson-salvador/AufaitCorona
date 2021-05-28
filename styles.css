@@ -147,3 +147,7 @@ p {
 	width: 100%;
 	transition: width 0.3s;
 }
+
+.data-visualization{
+    max-width: 800px;
+}

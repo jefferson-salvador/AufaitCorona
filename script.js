@@ -38,11 +38,13 @@ const changeCountry = () =>{
         document.getElementById("cases").innerHTML = data.cases.toLocaleString();
         document.getElementById("deaths").innerHTML = data.deaths.toLocaleString();
         document.getElementById("tests").innerHTML = data.tests.toLocaleString();
+        
     })
-
     document.getElementById("search").value = '';
 }
 
 const event = new Date();
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 document.getElementById("date").innerHTML = event.toLocaleDateString(undefined, options);
+
+
