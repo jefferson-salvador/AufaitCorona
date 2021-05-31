@@ -21,7 +21,11 @@ Ancess Condeza
 
 Julie-ann Fabiosa
 
+Jan Paolo Cortez
+
+Arvie Alcaraz
+
 Team: Ascian
 
 Note:
-The contents or this website is not originally from the authors. The developers used the advices from WHO and CDC that handles this issue more professionally. This website is not an official website of any agency. This is only used in Hackathon competition.
+The contents or this website is not originally from the authors. The developers used the advices from WHO and CDC that handles this issue more professionally. This website is not an official website of any agency. 
