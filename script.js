@@ -5,7 +5,7 @@ $(document).ready(function(){
 var input = document.getElementById("search");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
-   changeCountry();
+    changeCountry();
   }
 });
 
@@ -39,9 +39,10 @@ const changeCountry = () =>{
         document.getElementById("deaths").innerHTML = data.deaths.toLocaleString();
         document.getElementById("tests").innerHTML = data.tests.toLocaleString();
         
-    })
-    document.getElementById("search").value = '';
+    });
 }
+
+
 
 const event = new Date();
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
