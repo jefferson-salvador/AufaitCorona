@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish&family=Poppins&display=swap");
 
+/* GENERAL STYLES  */
 * {
 	margin: 0;
 	padding: 0;
@@ -28,13 +29,27 @@ p {
 }
 
 .navbar {
-	-webkit-box-shadow: 0 8px 6px -6px #999;
-	-moz-box-shadow: 0 8px 6px -6px #999;
-	box-shadow: 0 8px 6px -6px #999;
 	font-weight: bold;
 	position: sticky;
 	top: 0;
 	z-index: 3;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-item::after,
+.dropdown-item::after {
+	content: "";
+	display: block;
+	width: 0%;
+	height: 2px;
+	background-color: #66fcf1;
+	transition: width 0.3s;
+}
+
+.nav-item:hover::after,
+.dropdown-item:hover::after {
+	width: 100%;
+	transition: width 0.3s;
 }
 
 .card:hover {
@@ -42,10 +57,6 @@ p {
 		0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
 		0 22.3px 17.9px rgba(0, 0, 0, 0.072),
 		0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
-}
-
-#flag {
-	height: 25px;
 }
 
 .card-header {
@@ -57,6 +68,18 @@ p {
 	margin-bottom: -100px;
 }
 
+.fas {
+	font-size: 48px;
+}
+
+/* TRACKER STYLES */
+
+#flag {
+	height: 25px;
+}
+
+/* PREVENTION STYLES */
+
 #vid:hover {
 	transition: 0.5s all ease-in-out;
 	box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -65,26 +88,24 @@ p {
 		0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
-#flag {
-	height: 25px;
-}
-
-.footer {
-	padding-top: 20px;
-	bottom: 0;
-	font-size: small;
-	margin-bottom: -100px;
-}
-
-.fas {
-	font-size: 48px;
-}
+/* FAQ STYLES */
 
 .toast {
 	position: absolute;
 	right: 30px;
 	top: 25;
 }
+
+.answerList {
+	list-style-position: inside;
+	margin-left: 50px;
+}
+
+.card-header a{
+    text-align: left;
+}
+
+/* INDEX STYLES */
 
 #indexcard {
 	padding-bottom: 5%;
@@ -132,21 +153,7 @@ p {
 	border: 0;
 }
 
-.nav-item::after,
-.dropdown-item::after {
-	content: "";
-	display: block;
-	width: 0%;
-	height: 2px;
-	background-color: #66fcf1;
-	transition: width 0.3s;
-}
-
-.nav-item:hover::after,
-.dropdown-item:hover::after {
-	width: 100%;
-	transition: width 0.3s;
-}
+/* DATA VISUALIZATION STYLES */
 
 .data-visualization {
 	max-width: 800px;
