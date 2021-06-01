@@ -54,12 +54,15 @@
                         <div class="form-inline my-3">
                             <div class="mx-auto">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Change Country" id="search" autofocus>
-                                <input class="btn btn-light my-2 my-sm-0" type="button" id="submit" value="Change" onclick="changeCountry();changeData()"></input>
+                                <input class="btn btn-light my-2 my-sm-0" type="button" id="changeByCountry" value="Change" onclick="changeCountry();changeGraph();changeData()"></input>
                             </div>
                         </div>
                     </div>
                     <div class="card-title pt-3">
-                        <p class="pl-5" id="date"></p>
+                        <span class="pl-5" id="date"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>
+                            <input class="btn btn-light my-2 my-sm-0 border" type="button" id="changeToWorld" value="See Wordwide Data" onclick="worldData();changeToWorld();worldTimeline()"></input>
+                        </span>
                         <hr>
                     </div>
                     <div class="card-body text-info text-center">
@@ -118,6 +121,13 @@
                             <h2 id="graphTitle"></h2>
                             <div class="data-visualization mx-auto">
                                 <canvas id="trackerChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="display-flex justify-content-center">
+                            <h2 id="timelineTitle">Philippines Timeline</h2>
+                            <div class="data-visualization mx-auto">
+                                <canvas id="trackerTimeline"></canvas>
                             </div>
                         </div>
 

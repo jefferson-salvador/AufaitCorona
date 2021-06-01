@@ -4,9 +4,9 @@ $(document).ready(function(){
 
 var input = document.getElementById("search");
 input.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-    changeCountry();
-  }
+    if (event.keyCode === 13) {
+        changeData();
+    }
 });
 
 var myData = ["active", "critical", "recovered", "cases", "deaths", "tests"];
@@ -26,7 +26,7 @@ fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
     document.getElementById("tests").innerHTML = data.tests.toLocaleString();
 })
 
-const changeCountry = () =>{
+var changeData = () =>{
     var country = document.getElementById("search").value;
     fetch(`https://corona.lmao.ninja/v2/countries/${country}`)
     .then((response)=>{
@@ -45,10 +45,25 @@ const changeCountry = () =>{
     });
 }
 
+var worldData = () =>{
+    fetch(`https://corona.lmao.ninja/v2/all`)
+    .then((response)=>{
+        return response.json();
+    })
+    .then((data)=>{        
+        document.getElementById("country").innerHTML = "Wordwide";
+        document.getElementById("flag").src = '../images/globe.png';
+        document.getElementById("active").innerHTML = data.active.toLocaleString();
+        document.getElementById("critical").innerHTML = data.critical.toLocaleString();
+        document.getElementById("recovered").innerHTML = data.recovered.toLocaleString();
+        document.getElementById("cases").innerHTML = data.cases.toLocaleString();
+        document.getElementById("deaths").innerHTML = data.deaths.toLocaleString();
+        document.getElementById("tests").innerHTML = data.tests.toLocaleString();
+    });
+}
 
-
-const event = new Date();
-const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+var event = new Date();
+var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 document.getElementById("date").innerHTML = event.toLocaleDateString(undefined, options);
 
 
