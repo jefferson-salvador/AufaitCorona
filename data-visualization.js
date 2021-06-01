@@ -1,6 +1,5 @@
 var myChart;
 var graphTitle;
-
 input.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         
@@ -9,6 +8,25 @@ input.addEventListener("keyup", function(event) {
     }
 });
 
+var myBgColor = [
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)'
+];
+
+var myBorderColor = [
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 99, 132, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+];
+
+var myLabels = ['Active', 'Critical', 'Recovered', 'Cases', 'Deaths', 'Tests'];
 
 fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
 .then((response)=>{
@@ -17,30 +35,17 @@ fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
 .then((data)=>{
     graphTitle = data.country;
     document.getElementById("graphTitle").innerHTML = `COVID Cases Graph in ${data.country}`;
+    var delayed;
     var ctx = document.getElementById('trackerChart').getContext('2d');
     myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Active', 'Critical', 'Recovered', 'Cases', 'Deaths', 'Tests'],
+            labels: [...myLabels],
             datasets: [{
                 label: 'Covid-19 Tracker',
                 data: [data.active, data.critical, data.recovered, data.cases, data.deaths, data.tests],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                backgroundColor: [...myBgColor ],
+                borderColor: [...myBorderColor],
                 borderWidth: 1
             }]
         },
@@ -48,17 +53,25 @@ fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
             legend: {
                 display: false,
             },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
+            animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
+            }
         }
     });
 })
 
 const changeData = () =>{
     var country = document.getElementById("search").value;
+    var delayed;
     fetch(`https://corona.lmao.ninja/v2/countries/`+ String(`${country}`))
     .then((response)=>{
         return response.json();
@@ -71,26 +84,12 @@ const changeData = () =>{
         myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Active', 'Critical', 'Recovered', 'Cases', 'Deaths', 'Tests'],
+                labels: [...myLabels],
                 datasets: [{
                     label: 'Covid-19 Tracker',
                     data: [data.active, data.critical, data.recovered, data.cases, data.deaths, data.tests],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
+                    backgroundColor: [...myBgColor ],
+                    borderColor: [...myBorderColor],
                     borderWidth: 1
                 }]
             },
@@ -98,10 +97,17 @@ const changeData = () =>{
                 legend: {
                     display: false,
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+                animation: {
+                    onComplete: () => {
+                        delayed = true;
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+                        if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                        }
+                        return delay;
+                    },
                 },
             }
         });

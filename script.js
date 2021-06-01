@@ -9,6 +9,8 @@ input.addEventListener("keyup", function(event) {
   }
 });
 
+var myData = ["active", "critical", "recovered", "cases", "deaths", "tests"];
+
 fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
 .then((response)=>{
     return response.json();
@@ -35,6 +37,7 @@ const changeCountry = () =>{
         document.getElementById("flag").src = data.countryInfo.flag;
         document.getElementById("active").innerHTML = data.active.toLocaleString();
         document.getElementById("critical").innerHTML = data.critical.toLocaleString();
+        document.getElementById("recovered").innerHTML = data.recovered.toLocaleString();
         document.getElementById("cases").innerHTML = data.cases.toLocaleString();
         document.getElementById("deaths").innerHTML = data.deaths.toLocaleString();
         document.getElementById("tests").innerHTML = data.tests.toLocaleString();
