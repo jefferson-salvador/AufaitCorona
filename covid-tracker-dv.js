@@ -9,7 +9,6 @@ input.addEventListener("keyup", function(event) {
     }
 });
 
-
 // PIE GRAPH
 
 var myBgColor = [
@@ -32,7 +31,9 @@ var myBorderColor = [
 
 var myLabels = ['Active', 'Critical', 'Recovered', 'Cases', 'Deaths', 'Tests'];
 
-fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+
+fetch(`https://disease.sh/v3/covid-19/countries/Philippines`)
 .then((response)=>{
     return response.json();
 })
@@ -74,16 +75,15 @@ fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
 })
 
 var changeCountry = () =>{
-    myCountryChart.destroy();
     var delayed;
     var country = document.getElementById("search").value;
-    fetch(`https://corona.lmao.ninja/v2/countries/`+ String(`${country}`))
+    myCountryChart.destroy();
+    fetch(`https://disease.sh/v3/covid-19/countries/`+ String(`${country}`))
     .then((response)=>{
         return response.json();
     })
     .then((data)=>{
         
-    graphTitle = data.country;
         document.getElementById("graphTitle").innerHTML = `COVID Cases Graph in ${data.country}`;
         var ctx = document.getElementById('trackerChart').getContext('2d');
         myCountryChart = new Chart(ctx, {
@@ -121,13 +121,12 @@ var changeCountry = () =>{
 
 var changeToWorld = () =>{
     myCountryChart.destroy();
-    fetch(`https://corona.lmao.ninja/v2/all`)
+    fetch(`https://disease.sh/v3/covid-19/all`)
     .then((response)=>{
         return response.json();
     })
     .then((data)=>{
         
-    graphTitle = data.country;
         document.getElementById("graphTitle").innerHTML = `COVID Cases Graph Worldwide`;
         var ctx = document.getElementById('trackerChart').getContext('2d');
         myCountryChart = new Chart(ctx, {
@@ -152,12 +151,17 @@ var changeToWorld = () =>{
 }
 
 // LINE GRAPH
-fetch(`https://corona.lmao.ninja/v2/historical/Philippines?lastdays=all`)
+fetch(`https://disease.sh/v3/covid-19/historical/Philippines?lastdays=all`)
 .then((response)=>{
     return response.json();
 })
 .then((data)=>{
-    var timeArray = Object.keys(data.timeline.cases);
+    var timeArray = Object.keys(data.timeline.cases).map(date => new Date(date)).map(date => date.getMonth());
+    var monthArray = [];
+    var x = 0;
+    while(x < timeArray.length){
+       monthArray.push(months[timeArray[x++]]);
+    }
     var casesArray = Object.values(data.timeline.cases);
     var deathsArray = Object.values(data.timeline.deaths);
     var recoveredArray = Object.values(data.timeline.recovered);
@@ -165,7 +169,7 @@ fetch(`https://corona.lmao.ninja/v2/historical/Philippines?lastdays=all`)
     myTimelineChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [...timeArray],
+            labels: monthArray,
             datasets: [{
                 label: '# of Cases',
                 data: [...casesArray],
@@ -197,15 +201,20 @@ fetch(`https://corona.lmao.ninja/v2/historical/Philippines?lastdays=all`)
 })
 
 var changeTimeline = () =>{
-    myTimelineChart.destroy();
     var country = document.getElementById("search").value;
-    fetch(`https://corona.lmao.ninja/v2/historical/`+ String(`${country}`) + `?lastdays=all`)
+    myTimelineChart.destroy();
+    fetch(`https://disease.sh/v3/covid-19/historical/`+ String(`${country}`) + `?lastdays=all`)
     .then((response)=>{
         return response.json();
     })
     .then((data)=>{
         document.getElementById("timelineTitle").innerHTML = `${data.country} Timeline`;
-        var timeArray = Object.keys(data.timeline.cases);
+        var timeArray = Object.keys(data.timeline.cases).map(date => new Date(date)).map(date => date.getMonth());
+        var monthArray = [];
+        var x = 0;
+        while(x < timeArray.length){
+           monthArray.push(months[timeArray[x++]]);
+        }
         var casesArray = Object.values(data.timeline.cases);
         var deathsArray = Object.values(data.timeline.deaths);
         var recoveredArray = Object.values(data.timeline.recovered);
@@ -213,7 +222,7 @@ var changeTimeline = () =>{
         myTimelineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [...timeArray],
+                labels: monthArray,
                 datasets: [{
                     label: '# of Cases',
                     data: [...casesArray],
@@ -247,13 +256,18 @@ var changeTimeline = () =>{
 
 var worldTimeline = () =>{
     myTimelineChart.destroy();
-    fetch(`https://corona.lmao.ninja/v2/historical/all?lastdays=all`)
+    fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=all`)
     .then((response)=>{
         return response.json();
     })
     .then((data)=>{
         document.getElementById("timelineTitle").innerHTML = `World Timeline`;
-        var timeArray = Object.keys(data.cases);
+        var timeArray = Object.keys(data.cases).map(date => new Date(date)).map(date => date.getMonth());
+        var monthArray = [];
+        var x = 0;
+        while(x < timeArray.length){
+        monthArray.push(months[timeArray[x++]]);
+        }
         var casesArray = Object.values(data.cases);
         var deathsArray = Object.values(data.deaths);
         var recoveredArray = Object.values(data.recovered);
@@ -261,7 +275,7 @@ var worldTimeline = () =>{
         myTimelineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [...timeArray],
+                labels: monthArray,
                 datasets: [{
                     label: '# of Cases',
                     data: [...casesArray],

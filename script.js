@@ -11,7 +11,7 @@ input.addEventListener("keyup", function(event) {
 
 var myData = ["active", "critical", "recovered", "cases", "deaths", "tests"];
 
-fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
+fetch(`https://disease.sh/v3/covid-19/countries/Philippines`)
 .then((response)=>{
     return response.json();
 })
@@ -28,7 +28,7 @@ fetch(`https://corona.lmao.ninja/v2/countries/Philippines`)
 
 var changeData = () =>{
     var country = document.getElementById("search").value;
-    fetch(`https://corona.lmao.ninja/v2/countries/${country}`)
+    fetch(`https://disease.sh/v3/covid-19/countries/${country}`)
     .then((response)=>{
         return response.json();
     })
@@ -46,7 +46,7 @@ var changeData = () =>{
 }
 
 var worldData = () =>{
-    fetch(`https://corona.lmao.ninja/v2/all`)
+    fetch(`https://disease.sh/v3/covid-19/all`)
     .then((response)=>{
         return response.json();
     })
