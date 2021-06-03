@@ -1,3 +1,13 @@
+function showGraph(){
+    var element = document.getElementById("graph");
+    var text = document.getElementById("showGraph");
+    element.classList.toggle("d-block");
+    text.innerHTML === `Show Graph <span class="fas fa-angle-down arrow"></span>` ?
+    text.innerHTML = `Hide Graph <span class="fas fa-angle-up arrow"></span>` :
+    text.innerHTML = `Show Graph <span class="fas fa-angle-down arrow"></span>`;
+    
+}
+
 $(document).ready(function(){
     $('.toast').toast(window.outerWidth >= 960 ? 'show' : 'hide');
 });

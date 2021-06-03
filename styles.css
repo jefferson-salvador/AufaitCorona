@@ -155,6 +155,10 @@ p {
 
 /* DATA VISUALIZATION STYLES */
 
-.data-visualization {
+.covid-pie {
 	max-width: 800px;
+}
+
+.arrow {
+    font-size: 16px;
 }

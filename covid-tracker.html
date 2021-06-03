@@ -119,18 +119,20 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class=" p-5 display-flex justify-content-center mx-auto">
-                            <h2 id="graphTitle"></h2>
-                            <div class="data-visualization mx-auto">
-                                <canvas id="covidChart"></canvas>
+                        <button class="btn btn-light my-2 my-sm-0 border" onclick="showGraph()" id="showGraph">Show Graph <span class="fas fa-angle-down arrow"></span></button>
+                        <div class="d-none" id="graph">
+                            <div class=" p-5 display-flex justify-content-center mx-auto">
+                                <h2 id="graphTitle"></h2>
+                                <div class="covid-pie mx-auto">
+                                    <canvas id="covidChart"></canvas>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="display-flex justify-content-center">
-                            <h2 id="timelineTitle">Philippines Timeline</h2>
-                            <div class="data-visualization mx-auto">
-                                <canvas id="covidTimeline"></canvas>
+                            <div class="display-flex justify-content-center">
+                                <h2 id="timelineTitle">Philippines Timeline</h2>
+                                <div class="w-100 mx-auto">
+                                    <canvas id="covidTimeline"></canvas>
+                                </div>
                             </div>
                         </div>
 
