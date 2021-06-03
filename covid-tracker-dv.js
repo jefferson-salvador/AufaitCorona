@@ -107,7 +107,6 @@ fetch(`https://disease.sh/v3/covid-19/countries/Philippines`)
 var changeCountry = () => {
 	var delayed;
 	var country = document.getElementById("search").value;
-	myCountryChart.destroy();
 	fetch(`https://disease.sh/v3/covid-19/countries/` + String(`${country}`))
     .then((response) => {
         return response.json();
@@ -117,6 +116,7 @@ var changeCountry = () => {
             "graphTitle"
         ).innerHTML = `COVID Cases Graph in ${data.country}`;
         var ctx = document.getElementById("covidChart").getContext("2d");
+        myCountryChart.destroy();
         myCountryChart = new Chart(ctx, {
             type: "pie",
             data: {
@@ -166,7 +166,6 @@ var changeCountry = () => {
 };
 
 var changeToWorld = () => {
-	myCountryChart.destroy();
 	fetch(`https://disease.sh/v3/covid-19/all`)
     .then((response) => {
         return response.json();
@@ -176,6 +175,7 @@ var changeToWorld = () => {
             "graphTitle"
         ).innerHTML = `COVID Cases Graph Worldwide`;
         var ctx = document.getElementById("covidChart").getContext("2d");
+        myCountryChart.destroy();
         myCountryChart = new Chart(ctx, {
             type: "pie",
             data: {
@@ -270,7 +270,6 @@ fetch(`https://disease.sh/v3/covid-19/historical/Philippines?lastdays=all`)
 
 var changeTimeline = () => {
 	var country = document.getElementById("search").value;
-	myTimelineChart.destroy();
 	fetch(
 		`https://disease.sh/v3/covid-19/historical/` +
 			String(`${country}`) +
@@ -295,6 +294,7 @@ var changeTimeline = () => {
 			var deathsArray = Object.values(data.timeline.deaths);
 			var recoveredArray = Object.values(data.timeline.recovered);
 			var ctx = document.getElementById("covidTimeline");
+            myTimelineChart.destroy();
 			myTimelineChart = new Chart(ctx, {
 				type: "line",
 				data: {
@@ -329,7 +329,6 @@ var changeTimeline = () => {
 };
 
 var worldTimeline = () => {
-	myTimelineChart.destroy();
 	fetch(`https://disease.sh/v3/covid-19/historical/all?lastdays=all`)
 		.then((response) => {
 			return response.json();
@@ -350,6 +349,7 @@ var worldTimeline = () => {
 			var deathsArray = Object.values(data.deaths);
 			var recoveredArray = Object.values(data.recovered);
 			var ctx = document.getElementById("covidTimeline");
+            myTimelineChart.destroy();
 			myTimelineChart = new Chart(ctx, {
 				type: "line",
 				data: {

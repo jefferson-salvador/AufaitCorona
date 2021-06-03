@@ -1,3 +1,5 @@
+
+
 function showGraph(){
     var element = document.getElementById("graph");
     var text = document.getElementById("showGraph");
@@ -72,8 +74,16 @@ var worldData = () =>{
     });
 }
 
-var event = new Date();
-var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-document.getElementById("date").innerHTML = event.toLocaleDateString(undefined, options);
+function startTime() {
+    var today = new Date();
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('currentDate').innerHTML = today.toLocaleDateString(undefined, options) + " " + today.toLocaleTimeString();
+    document.getElementById('currentDate2').innerHTML = today.toLocaleDateString(undefined, options) + " " + today.toLocaleTimeString();
+    var t = setTimeout(startTime, 1000);
+}
+function checkTime(i) {
+if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+return i;
+}
 
 

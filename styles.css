@@ -69,7 +69,7 @@ p {
 }
 
 .fas {
-	font-size: 48px;
+	font-size: 24px;
 }
 
 /* TRACKER STYLES */
@@ -161,4 +161,8 @@ p {
 
 .arrow {
     font-size: 16px;
+}
+
+#graph {
+    transition: 1s all ease-in-out ;
 }
