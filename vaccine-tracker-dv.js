@@ -1,5 +1,4 @@
-var x = "hello";
-
+var message = "No data for this country or country does not exist";
 var myTimelineChart;
 var myVaccineChart;
 var population = 0;
@@ -245,13 +244,15 @@ select.selectedIndex = "155";
 
 function val(){
     currentCountry = document.getElementById("selectCountry").value;
-    document.getElementById("total-population").innerHTML = document.getElementById("selectCountry").value; 
-    changeVaccineLine();
-    changeVaccinePie();
+    var result = changeVaccineLine();
+    if (result == 1){
+    } else {
+        changeVaccinePie();
+    }
 }
 
 
-// LINE GRAPH
+// INITIAL GRAPH GRAPH
 fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/Philippines`)
 .then((response)=>{
     return response.json();
@@ -261,7 +262,7 @@ fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/Philippines`)
     var dosesArray = Object.values(data.timeline);
     document.getElementById("vaccineTimelineTitle").innerHTML = `${data.country} Vaccination Timeline`;
     document.getElementById("total-doses").innerHTML = dosesArray[dosesArray.length-1].toLocaleString();
-    lastDose = dosesArray[dosesArray.length-1];
+    lastDose =  Number(document.getElementById("total-doses").innerHTML.replace(/,/g, ''));
 
     var ctx = document.getElementById('vaccineTimeline');
     myVaccineTimeline = new Chart(ctx, {
@@ -306,12 +307,53 @@ fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/Philippines`)
     });
 })
 
+fetch(`https://disease.sh/v3/covid-19/countries/Philippines`)
+.then((response)=>{
+    return response.json();
+})
+.then((data)=>{
+    population = data.population;
+    document.getElementById("vaccineGraphTitle").innerHTML = `${data.country} Graph Population x Doses`;
+    document.getElementById("total-population").innerHTML = population.toLocaleString();
+    document.getElementById("vacc")
+
+    var ctx2 = document.getElementById('vaccineChart');
+    myVaccineChart = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['Unvaccinated', 'Vaccinated'],
+            datasets: [{
+                label: 'Vaccine Doses per Day',
+                data: [(population-lastDose), lastDose],
+                    backgroundColor: [
+                        "rgba(255, 159, 64, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(255, 159, 64, 1)",
+                        "rgba(54, 162, 235, 1)",
+                    ],
+                borderWidth: 1
+            }
+            ]
+            
+        },
+        options: {
+        }
+    });
+})
+
+// LINE GRAPH
 function changeVaccineLine(){
-    lastDose = 0;
     population = 0;
+    lastDose = 0;
     fetch(`https://disease.sh/v3/covid-19/vaccine/coverage/countries/`+currentCountry)
     .then((response) => {
-        return response.json();
+        if(response.ok){
+            return response.json();
+        } else {
+            throw new Error(message);
+        }
     })
     .then((data) => {
         document.getElementById("vaccineTimelineTitle").innerHTML = `${data.country} Vaccination Timeline`;
@@ -319,7 +361,6 @@ function changeVaccineLine(){
         var dosesArray = Object.values(data.timeline);
 
         document.getElementById("total-doses").innerHTML = dosesArray[dosesArray.length-1].toLocaleString();
-        lastDose = 0;
         lastDose = dosesArray[dosesArray.length-1];
 
         var ctx = document.getElementById('vaccineTimeline');
@@ -355,92 +396,16 @@ function changeVaccineLine(){
                 }
             }
         });
-    });
+    })
+    .catch((error) => {
+        alert(error);
+    })
 
 }
-
-// PIE GRAPH
-fetch(`https://disease.sh/v3/covid-19/countries/Philippines`)
-.then((response)=>{
-    return response.json();
-})
-.then((data)=>{
-    population = data.population;
-    document.getElementById("vaccineGraphTitle").innerHTML = `${data.country} Graph Population x Doses`;
-    document.getElementById("total-population").innerHTML = population.toLocaleString();
-    document.getElementById("vacc")
-
-    var ctx2 = document.getElementById('vaccineChart');
-    myVaccineChart = new Chart(ctx2, {
-        type: 'pie',
-        data: {
-            labels: ['Population', 'Doses'],
-            datasets: [{
-                label: 'Vaccine Doses per Day',
-                data: [(population-lastDose), lastDose],
-                    backgroundColor: [
-                        "rgba(255, 159, 64, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                    ],
-                    borderColor: [
-                        "rgba(255, 159, 64, 1)",
-                        "rgba(54, 162, 235, 1)",
-                    ],
-                borderWidth: 1
-            }
-            ]
-            
-        },
-        options: {
-        }
-    });
-})
-
-function changeVaccinePie() {
-    lastDose = 0;
-    population = 0;
-    myVaccineChart.destroy();
-    fetch(`https://disease.sh/v3/covid-19/countries/`+currentCountry)
-    .then((response)=>{
-        return response.json();
-    })
-    .then((data)=>{
-        document.getElementById("vaccineGraphTitle").innerHTML = `${data.country} Population and Doses`;
-        population= 0;
-        population = data.population;
-        document.getElementById("total-population").innerHTML = population.toLocaleString();
-
-        var ctx2 = document.getElementById('vaccineChart');
-        myVaccineChart = new Chart(ctx2, {
-            type: 'pie',
-            data: {
-                labels: ['Population', 'Doses'],
-                datasets: [{
-                    label: 'Vaccine Doses per Day',
-                    data: [(population-lastDose), lastDose],
-                    backgroundColor: [
-                        "rgba(255, 159, 64, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                    ],
-                    borderColor: [
-                        "rgba(255, 159, 64, 1)",
-                        "rgba(54, 162, 235, 1)",
-                    ],
-                    borderWidth: 1
-                }
-                ]
-                
-            },
-            options: {
-            }
-        });
-    })
-}
-
-
-// WORLD TIME LINE 
 
 function worldVaccineLine(){
+    population = 0;
+    lastDose = 0;
     fetch(`https://disease.sh/v3/covid-19/vaccine/coverage`)
     .then((response) => {
         return response.json();
@@ -451,7 +416,6 @@ function worldVaccineLine(){
         var dosesArray = Object.values(data);
 
         document.getElementById("total-doses").innerHTML = dosesArray[dosesArray.length-1].toLocaleString();
-        lastDose = 0;
         lastDose = dosesArray[dosesArray.length-1];
 
         var ctx = document.getElementById('vaccineTimeline');
@@ -490,16 +454,55 @@ function worldVaccineLine(){
     });
 }
 
+
+// PIE GRAPH
+
+
+function changeVaccinePie() {
+    fetch(`https://disease.sh/v3/covid-19/countries/`+currentCountry)
+    .then((response)=>{
+        return response.json();
+    })
+    .then((data)=>{
+        document.getElementById("vaccineGraphTitle").innerHTML = `${data.country} Population and Doses`;
+        population = data.population;
+        document.getElementById("total-population").innerHTML = population.toLocaleString();
+
+        var ctx2 = document.getElementById('vaccineChart');
+        myVaccineChart.destroy();
+        myVaccineChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Unvaccinated', 'Vaccinated'],
+                datasets: [{
+                    label: 'Vaccine Doses per Day',
+                    data: [(population-lastDose), lastDose],
+                    backgroundColor: [
+                        "rgba(255, 159, 64, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                    ],
+                    borderColor: [
+                        "rgba(255, 159, 64, 1)",
+                        "rgba(54, 162, 235, 1)",
+                    ],
+                    borderWidth: 1
+                }
+                ]
+                
+            },
+            options: {
+            }
+        });
+    })
+}
+
 function worldVaccinePie(){
-    lastDose = 0;
-    population = 0;
     fetch(`https://disease.sh/v3/covid-19/all`)
     .then((response)=>{
         return response.json();
     })
     .then((data)=>{
         document.getElementById("vaccineGraphTitle").innerHTML = `World Population and Doses`;
-        population = 0;
         population = data.population;
         document.getElementById("total-population").innerHTML = population.toLocaleString();
         var ctx2 = document.getElementById('vaccineChart');
@@ -507,7 +510,7 @@ function worldVaccinePie(){
         myVaccineChart = new Chart(ctx2, {
             type: 'pie',
             data: {
-                labels: ['Population', 'Doses'],
+                labels: ['Unvaccinated', 'Vaccinated'],
                 datasets: [{
                     label: 'Vaccine Doses per Day',
                     data: [(population-lastDose), lastDose],

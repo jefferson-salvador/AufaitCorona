@@ -53,24 +53,21 @@
                 </div>
                 <div class="card border-info mb-3" id="main-card">
                     <div class="card-header text-center bg-info">
-                        <h3><b id="country"></b>&nbsp;&nbsp;<img src="" alt="" id="flag"></h3>
-                        <div class="form-inline my-3">
-                            <div class="mx-auto">
-                                <select class="custom-select custom-select mb-3" id="selectCountry" onchange="val()">
+                        <div class="form-inline">
+                            <div class="mx-auto d-flex justify-content-center align-items-center">
+                                <select class="custom-select custom-select" id="selectCountry" onchange="val()">
                                 </select>
+                                <span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>
+                                    <input class="btn btn-light my-2 my-sm-0 border" type="button" id="changeToWorld" value="See Wordwide Data" onclick="worldVaccineLine();worldVaccinePie()"></input>
+                                </span>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-title p-3">
-                        <span>
-                            <input class="btn btn-light my-2 my-sm-0 border" type="button" id="changeToWorld" value="See Wordwide Data" onclick="worldVaccineLine();worldVaccinePie()"></input>
-                        </span>
-                        <hr>
                     </div>
                     <div class="row card-body text-info text-center">
                         <div class="col-6 display-flex justify-content-center mx-auto">
                             <h2 id="vaccineGraphTitle">Philippines Population by Doses</h2>
-                            <span>Population: <span id="total-population"></span></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Doses: <span id="total-doses"></span></span>
+                            <span>Total Population: <span id="total-population"></span></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Doses: <span id="total-doses"></span></span>
                             <div class="w-75 mx-auto">
                                 <canvas id="vaccineChart"></canvas>
                             </div>
