@@ -78,7 +78,6 @@ function startTime() {
     var today = new Date();
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('currentDate').innerHTML = today.toLocaleDateString(undefined, options) + " " + today.toLocaleTimeString();
-    document.getElementById('currentDate2').innerHTML = today.toLocaleDateString(undefined, options) + " " + today.toLocaleTimeString();
     var t = setTimeout(startTime, 1000);
 }
 function checkTime(i) {
