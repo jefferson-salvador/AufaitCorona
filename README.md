@@ -7,7 +7,7 @@ Option 1:
 2. Open index.html
 
 Option 2:<br>
-Open the link https://jefferson-salvador.github.io/AuFaitCorona/
+Open the link https://jefferson-salvador.github.io/AufaitCorona/
 
 What is AuFaitCorona?<br>
 AuFaitCorona is a website for Covid-19 awareness. It also provides links to other website and applications that can help people survive this pandemic and after pandemic. <br><br>
